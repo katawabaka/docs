@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluetooth Device Scanner</title>
+</head>
+<body>
+
+<button id="scan">Scan Bluetooth Devices</button>
+<ul id="deviceList"></ul>
+
+<script>
+    document.getElementById('scan').addEventListener('click', async () => {
+        try {
+            const device = await navigator.bluetooth.requestDevice({
+                acceptAllDevices: true
+            });
+
+            const listItem = document.createElement('li');
+            listItem.textContent = `Device: ${device.name}, ID: ${device.id}`;
+            document.getElementById('deviceList').appendChild(listItem);
+        } catch (error) {
+            console.error("Bluetooth Error:", error);
+        }
+    });
+</script>
+
+</body>
+</html>
